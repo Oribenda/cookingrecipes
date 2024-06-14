@@ -9,7 +9,7 @@ interface ShoppingListItemDao {
     fun getAllItems(): LiveData<List<ShoppingListItem>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(item: ShoppingListItem)
+    suspend fun insert(item: ShoppingListItem): Long
 
     @Update
     suspend fun update(item: ShoppingListItem)

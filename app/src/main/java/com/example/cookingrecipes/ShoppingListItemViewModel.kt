@@ -24,12 +24,17 @@ class ShoppingListItemViewModel(application: Application) : AndroidViewModel(app
     }
 
     private fun mergeItems(items: List<ShoppingListItem>): List<ShoppingListItem> {
-        val mergedMap = mutableMapOf<String, Int>()
+        val mergedMap = mutableMapOf<String, ShoppingListItem>()
         items.forEach { item ->
-            val currentQuantity = mergedMap[item.name]?.plus(item.quantity.toInt()) ?: item.quantity.toInt()
-            mergedMap[item.name] = currentQuantity
+            if (mergedMap.containsKey(item.name)) {
+                val existingItem = mergedMap[item.name]!!
+                val newQuantity = existingItem.quantity.toInt() + item.quantity.toInt()
+                mergedMap[item.name] = existingItem.copy(quantity = newQuantity.toString())
+            } else {
+                mergedMap[item.name] = item
+            }
         }
-        return mergedMap.map { ShoppingListItem(name = it.key, quantity = it.value.toString()) }
+        return mergedMap.values.toList()
     }
 
     fun insert(item: ShoppingListItem) = viewModelScope.launch {
@@ -41,6 +46,7 @@ class ShoppingListItemViewModel(application: Application) : AndroidViewModel(app
     }
 
     fun delete(item: ShoppingListItem) = viewModelScope.launch {
+        Log.d("ShoppingListItemVM", "Deleting item: $item")
         repository.delete(item)
     }
 }

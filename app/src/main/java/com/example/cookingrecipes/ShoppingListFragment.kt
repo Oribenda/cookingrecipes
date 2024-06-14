@@ -22,6 +22,7 @@ class ShoppingListFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.shopping_list_recyclerview)
         val adapter = ShoppingListAdapter { item ->
+            Log.d("ShoppingListFragment", "Deleting item: $item")
             shoppingListItemViewModel.delete(item)
         }
         recyclerView.adapter = adapter
