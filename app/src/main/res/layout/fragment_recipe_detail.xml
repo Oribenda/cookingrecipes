@@ -19,12 +19,14 @@
             android:textStyle="bold"
             android:paddingBottom="8dp" />
 
-        <TextView
-            android:id="@+id/recipe_ingredients"
+        <LinearLayout
+            android:id="@+id/ingredients_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:paddingBottom="8dp" />
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
+            <!-- Dynamic ingredients will be added here -->
+        </LinearLayout>
 
         <TextView
             android:id="@+id/recipe_instructions"

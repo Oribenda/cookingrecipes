@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 class AddRecipeFragment : Fragment() {
 
     private val recipeViewModel: RecipeViewModel by viewModels()
+    private val ingredientViews = mutableListOf<View>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,14 +23,23 @@ class AddRecipeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_add_recipe, container, false)
 
         val nameEditText = view.findViewById<EditText>(R.id.edit_text_name)
-        val ingredientsEditText = view.findViewById<EditText>(R.id.edit_text_ingredients)
+        val ingredientsContainer = view.findViewById<LinearLayout>(R.id.ingredients_container)
         val instructionsEditText = view.findViewById<EditText>(R.id.edit_text_instructions)
+        val addButton = view.findViewById<Button>(R.id.button_add_ingredient)
         val saveButton = view.findViewById<Button>(R.id.button_save)
+
+        addButton.setOnClickListener {
+            addIngredientField(ingredientsContainer)
+        }
 
         saveButton.setOnClickListener {
             val name = nameEditText.text.toString()
-            val ingredients = ingredientsEditText.text.toString()
             val instructions = instructionsEditText.text.toString()
+            val ingredients = ingredientViews.map { ingredientView ->
+                val ingredientName = ingredientView.findViewById<EditText>(R.id.edit_ingredient_name).text.toString()
+                val ingredientQuantity = ingredientView.findViewById<EditText>(R.id.edit_ingredient_quantity).text.toString()
+                Ingredient(ingredientName, ingredientQuantity)
+            }
 
             if (name.isNotEmpty() && ingredients.isNotEmpty() && instructions.isNotEmpty()) {
                 val newRecipe = Recipe(
@@ -42,5 +53,11 @@ class AddRecipeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun addIngredientField(container: LinearLayout) {
+        val ingredientView = layoutInflater.inflate(R.layout.item_add_ingredient, container, false)
+        container.addView(ingredientView)
+        ingredientViews.add(ingredientView)
     }
 }

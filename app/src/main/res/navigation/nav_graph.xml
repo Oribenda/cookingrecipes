@@ -72,4 +72,11 @@
         android:name="com.example.cookingrecipes.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/shoppingListFragment"
+        android:name="com.example.cookingrecipes.ShoppingListFragment"
+        android:label="Shopping List"
+        tools:layout="@layout/fragment_shopping_list" />
+
 </navigation>

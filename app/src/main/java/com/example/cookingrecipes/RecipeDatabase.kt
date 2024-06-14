@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
-@Database(entities = [Recipe::class], version = 1, exportSchema = false)
+@Database(entities = [Recipe::class, ShoppingListItem::class], version = 3, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class RecipeDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
+    abstract fun shoppingListItemDao(): ShoppingListItemDao
 
     companion object {
         @Volatile
@@ -19,7 +22,9 @@ abstract class RecipeDatabase : RoomDatabase() {
                     context.applicationContext,
                     RecipeDatabase::class.java,
                     "recipe_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration() // Use this to reset the database in case of schema changes
+                    .build()
                 INSTANCE = instance
                 instance
             }
