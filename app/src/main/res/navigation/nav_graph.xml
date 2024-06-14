@@ -1,9 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/recipeListFragment">
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.cookingrecipes.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shoppingListFragment"
+            app:destination="@id/shoppingListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/recipeListFragment"
@@ -25,6 +37,9 @@
         <action
             android:id="@+id/action_recipeListFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_recipeListFragment_to_shoppingListFragment"
+            app:destination="@id/shoppingListFragment" />
     </fragment>
 
     <fragment
@@ -78,5 +93,4 @@
         android:name="com.example.cookingrecipes.ShoppingListFragment"
         android:label="Shopping List"
         tools:layout="@layout/fragment_shopping_list" />
-
 </navigation>

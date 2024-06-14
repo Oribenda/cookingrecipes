@@ -3,16 +3,17 @@ package com.example.cookingrecipes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class ShoppingListAdapter : ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(SHOPPING_LIST_COMPARATOR) {
+class ShoppingListAdapter(private val onDeleteClick: (ShoppingListItem) -> Unit) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(SHOPPING_LIST_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_shopping_list, parent, false)
-        return ShoppingListViewHolder(view)
+        return ShoppingListViewHolder(view, onDeleteClick)
     }
 
     override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
@@ -20,13 +21,17 @@ class ShoppingListAdapter : ListAdapter<ShoppingListItem, ShoppingListAdapter.Sh
         holder.bind(current)
     }
 
-    class ShoppingListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ShoppingListViewHolder(itemView: View, private val onDeleteClick: (ShoppingListItem) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val itemNameView: TextView = itemView.findViewById(R.id.item_name)
         private val itemQuantityView: TextView = itemView.findViewById(R.id.item_quantity)
+        private val deleteButton: Button = itemView.findViewById(R.id.button_delete)
 
         fun bind(item: ShoppingListItem) {
             itemNameView.text = item.name
             itemQuantityView.text = item.quantity
+            deleteButton.setOnClickListener {
+                onDeleteClick(item)
+            }
         }
     }
 
