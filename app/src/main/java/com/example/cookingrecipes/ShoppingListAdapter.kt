@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 
 class ShoppingListAdapter(private val onDeleteClick: (ShoppingListItem) -> Unit) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(SHOPPING_LIST_COMPARATOR) {
 
@@ -31,7 +30,6 @@ class ShoppingListAdapter(private val onDeleteClick: (ShoppingListItem) -> Unit)
             itemNameView.text = item.name
             itemQuantityView.text = item.quantity
             deleteButton.setOnClickListener {
-                Log.d("ShoppingListAdapter", "Delete button clicked for item: $item")
                 onDeleteClick(item)
             }
         }

@@ -16,4 +16,7 @@ interface ShoppingListItemDao {
 
     @Delete
     suspend fun delete(item: ShoppingListItem)
+
+    @Query("DELETE FROM shopping_list_items WHERE name = :name")
+    suspend fun deleteItemsByName(name: String)
 }

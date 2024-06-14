@@ -20,4 +20,9 @@ class ShoppingListItemRepository(private val shoppingListItemDao: ShoppingListIt
         shoppingListItemDao.delete(item)
         Log.d("ShoppingListItemRepo", "Deleted item: $item")
     }
+
+    suspend fun deleteItemsByName(name: String) {
+        shoppingListItemDao.deleteItemsByName(name)
+        Log.d("ShoppingListItemRepo", "Deleted items with name: $name")
+    }
 }

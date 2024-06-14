@@ -46,7 +46,7 @@ class ShoppingListItemViewModel(application: Application) : AndroidViewModel(app
     }
 
     fun delete(item: ShoppingListItem) = viewModelScope.launch {
-        Log.d("ShoppingListItemVM", "Deleting item: $item")
-        repository.delete(item)
+        Log.d("ShoppingListItemVM", "Deleting items with name: ${item.name}")
+        repository.deleteItemsByName(item.name)
     }
 }
