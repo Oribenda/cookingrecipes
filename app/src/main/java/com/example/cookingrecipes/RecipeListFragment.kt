@@ -1,6 +1,7 @@
 package com.example.cookingrecipes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,11 +23,16 @@ class RecipeListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_recipe_list, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recipe_list_recyclerview)
-        val adapter = RecipeListAdapter { recipe ->
-            val actionId = R.id.action_recipeListFragment_to_recipeDetailFragment
-            val bundle = Bundle().apply { putInt("recipeId", recipe.id) }
-            findNavController().navigate(actionId, bundle)
-        }
+        val adapter = RecipeListAdapter(
+            onRecipeClick = { recipe ->
+                val actionId = R.id.action_recipeListFragment_to_recipeDetailFragment
+                val bundle = Bundle().apply { putInt("recipeId", recipe.id) }
+                findNavController().navigate(actionId, bundle)
+            },
+            onDeleteClick = { recipe ->
+                recipeViewModel.delete(recipe)
+            }
+        )
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 

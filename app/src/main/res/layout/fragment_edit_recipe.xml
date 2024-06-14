@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -10,37 +12,35 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edit_text_name"
+            android:id="@+id/edit_recipe_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Recipe Name" />
-
-        <LinearLayout
-            android:id="@+id/ingredients_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp">
-
-            <!-- Dynamic ingredient input fields will be added here -->
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/button_add_ingredient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Ingredient"
-            android:layout_marginTop="8dp" />
+            android:hint="Recipe Name"
+            android:textSize="18sp"
+            android:paddingBottom="8dp" />
 
         <EditText
-            android:id="@+id/edit_text_instructions"
+            android:id="@+id/edit_recipe_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Instructions"
-            android:layout_marginTop="8dp" />
+            android:textSize="18sp"
+            android:paddingBottom="8dp"
+            android:inputType="textMultiLine"
+            android:minLines="4" />
+
+        <EditText
+            android:id="@+id/edit_recipe_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingredients (format: name:quantity,name:quantity)"
+            android:textSize="18sp"
+            android:paddingBottom="8dp"
+            android:inputType="textMultiLine"
+            android:minLines="4" />
 
         <Button
-            android:id="@+id/button_save"
+            android:id="@+id/button_save_recipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"

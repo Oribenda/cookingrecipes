@@ -16,6 +16,10 @@ class RecipeViewModel(application: Application) : AndroidViewModel(application) 
         allRecipes = repository.allRecipes
     }
 
+    fun getRecipeById(id: Int): LiveData<Recipe> {
+        return repository.getRecipeById(id)
+    }
+
     fun insert(recipe: Recipe) = viewModelScope.launch {
         repository.insert(recipe)
     }
@@ -26,9 +30,5 @@ class RecipeViewModel(application: Application) : AndroidViewModel(application) 
 
     fun delete(recipe: Recipe) = viewModelScope.launch {
         repository.delete(recipe)
-    }
-
-    fun getRecipeById(id: Int): LiveData<Recipe> {
-        return repository.getRecipeById(id)
     }
 }

@@ -5,6 +5,10 @@ import androidx.lifecycle.LiveData
 class RecipeRepository(private val recipeDao: RecipeDao) {
     val allRecipes: LiveData<List<Recipe>> = recipeDao.getAllRecipes()
 
+    fun getRecipeById(id: Int): LiveData<Recipe> {
+        return recipeDao.getRecipeById(id)
+    }
+
     suspend fun insert(recipe: Recipe) {
         recipeDao.insert(recipe)
     }
@@ -15,9 +19,5 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
 
     suspend fun delete(recipe: Recipe) {
         recipeDao.delete(recipe)
-    }
-
-    fun getRecipeById(id: Int): LiveData<Recipe> {
-        return recipeDao.getRecipeById(id)
     }
 }

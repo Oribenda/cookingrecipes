@@ -5,7 +5,13 @@ import androidx.room.*
 
 @Dao
 interface RecipeDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Query("SELECT * FROM recipes WHERE id = :id")
+    fun getRecipeById(id: Int): LiveData<Recipe>
+
+    @Query("SELECT * FROM recipes")
+    fun getAllRecipes(): LiveData<List<Recipe>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(recipe: Recipe)
 
     @Update
@@ -13,10 +19,4 @@ interface RecipeDao {
 
     @Delete
     suspend fun delete(recipe: Recipe)
-
-    @Query("SELECT * FROM recipes ORDER BY name ASC")
-    fun getAllRecipes(): LiveData<List<Recipe>>
-
-    @Query("SELECT * FROM recipes WHERE id = :id")
-    fun getRecipeById(id: Int): LiveData<Recipe>
 }
