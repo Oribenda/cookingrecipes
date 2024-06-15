@@ -1,28 +1,31 @@
 package com.example.cookingrecipes
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 
 class ShoppingListItemRepository(private val shoppingListItemDao: ShoppingListItemDao) {
+
     val allItems: LiveData<List<ShoppingListItem>> = shoppingListItemDao.getAllItems()
 
+    suspend fun insertOrUpdate(item: ShoppingListItem) {
+        val existingItem = shoppingListItemDao.getItemByName(item.name)
+        if (existingItem != null) {
+            val newQuantity = (existingItem.quantity.toInt() + item.quantity.toInt()).toString()
+            val updatedItem = existingItem.copy(quantity = newQuantity)
+            shoppingListItemDao.update(updatedItem)
+        } else {
+            shoppingListItemDao.insert(item)
+        }
+    }
+
     suspend fun insert(item: ShoppingListItem) {
-        val id = shoppingListItemDao.insert(item)
-        Log.d("ShoppingListItemRepo", "Inserted item with ID: $id")
+        shoppingListItemDao.insert(item)
     }
 
     suspend fun update(item: ShoppingListItem) {
         shoppingListItemDao.update(item)
-        Log.d("ShoppingListItemRepo", "Updated item: $item")
     }
 
     suspend fun delete(item: ShoppingListItem) {
         shoppingListItemDao.delete(item)
-        Log.d("ShoppingListItemRepo", "Deleted item: $item")
-    }
-
-    suspend fun deleteItemsByName(name: String) {
-        shoppingListItemDao.deleteItemsByName(name)
-        Log.d("ShoppingListItemRepo", "Deleted items with name: $name")
     }
 }

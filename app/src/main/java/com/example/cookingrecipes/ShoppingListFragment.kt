@@ -1,7 +1,6 @@
 package com.example.cookingrecipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,14 +21,12 @@ class ShoppingListFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.shopping_list_recyclerview)
         val adapter = ShoppingListAdapter { item ->
-            Log.d("ShoppingListFragment", "Deleting items with name: ${item.name}")
             shoppingListItemViewModel.delete(item)
         }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        shoppingListItemViewModel.mergedItems.observe(viewLifecycleOwner) { items ->
-            Log.d("ShoppingListFragment", "Observed merged items: $items")
+        shoppingListItemViewModel.allItems.observe(viewLifecycleOwner) { items ->
             items?.let { adapter.submitList(it) }
         }
 

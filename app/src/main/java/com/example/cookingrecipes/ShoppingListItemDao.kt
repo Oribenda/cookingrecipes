@@ -5,11 +5,9 @@ import androidx.room.*
 
 @Dao
 interface ShoppingListItemDao {
-    @Query("SELECT * FROM shopping_list_items")
-    fun getAllItems(): LiveData<List<ShoppingListItem>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(item: ShoppingListItem): Long
+    suspend fun insert(item: ShoppingListItem)
 
     @Update
     suspend fun update(item: ShoppingListItem)
@@ -17,6 +15,9 @@ interface ShoppingListItemDao {
     @Delete
     suspend fun delete(item: ShoppingListItem)
 
-    @Query("DELETE FROM shopping_list_items WHERE name = :name")
-    suspend fun deleteItemsByName(name: String)
+    @Query("SELECT * FROM shopping_list_items ORDER BY name ASC")
+    fun getAllItems(): LiveData<List<ShoppingListItem>>
+
+    @Query("SELECT * FROM shopping_list_items WHERE name = :name LIMIT 1")
+    suspend fun getItemByName(name: String): ShoppingListItem?
 }

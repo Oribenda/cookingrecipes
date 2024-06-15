@@ -29,9 +29,6 @@
             android:id="@+id/action_recipeListFragment_to_addRecipeFragment"
             app:destination="@id/addRecipeFragment" />
         <action
-            android:id="@+id/action_recipeListFragment_to_editRecipeFragment"
-            app:destination="@id/editRecipeFragment" />
-        <action
             android:id="@+id/action_recipeListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
@@ -48,32 +45,27 @@
         android:label="Recipe Detail"
         tools:layout="@layout/fragment_recipe_detail">
         <action
-            android:id="@+id/action_recipeDetailFragment_to_editRecipeFragment"
-            app:destination="@id/editRecipeFragment">
+            android:id="@+id/action_recipeDetailFragment_to_addRecipeFragment"
+            app:destination="@id/addRecipeFragment">
             <argument
                 android:name="recipeId"
-                app:argType="integer" />
+                app:argType="integer"
+                android:defaultValue="-1" />
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/addRecipeFragment"
         android:name="com.example.cookingrecipes.AddRecipeFragment"
-        android:label="Add Recipe"
+        android:label="Add/Edit Recipe"
         tools:layout="@layout/fragment_add_recipe">
         <action
             android:id="@+id/action_addRecipeFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/editRecipeFragment"
-        android:name="com.example.cookingrecipes.EditRecipeFragment"
-        android:label="Edit Recipe"
-        tools:layout="@layout/fragment_edit_recipe">
-        <action
-            android:id="@+id/action_editRecipeFragment_to_recipeListFragment"
-            app:destination="@id/recipeListFragment" />
+        <argument
+            android:name="recipeId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 
     <fragment

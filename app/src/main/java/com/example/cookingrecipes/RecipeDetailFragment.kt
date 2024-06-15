@@ -1,7 +1,6 @@
 package com.example.cookingrecipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,9 +45,8 @@ class RecipeDetailFragment : Fragment() {
                         ingredientNameTextView.text = ingredient.name
                         ingredientQuantityTextView.text = ingredient.quantity
                         addButton.setOnClickListener {
-                            val shoppingListItem = ShoppingListItem(name = ingredient.name, quantity = ingredient.quantity)
-                            Log.d("RecipeDetailFragment", "Adding item to shopping list: $shoppingListItem")
-                            shoppingListItemViewModel.insert(shoppingListItem)
+                            val item = ShoppingListItem(name = ingredient.name, quantity = ingredient.quantity)
+                            shoppingListItemViewModel.insertOrUpdate(item)
                         }
 
                         ingredientsList.addView(ingredientView)
@@ -58,9 +56,10 @@ class RecipeDetailFragment : Fragment() {
         }
 
         editButton.setOnClickListener {
-            val actionId = R.id.action_recipeDetailFragment_to_editRecipeFragment
-            val bundle = Bundle().apply { putInt("recipeId", recipeId) }
-            findNavController().navigate(actionId, bundle)
+            val bundle = Bundle().apply {
+                putInt("recipeId", recipeId)
+            }
+            findNavController().navigate(R.id.action_recipeDetailFragment_to_addRecipeFragment, bundle)
         }
 
         return view

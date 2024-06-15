@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class ShoppingListAdapter(private val onDeleteClick: (ShoppingListItem) -> Unit) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(SHOPPING_LIST_COMPARATOR) {
+class ShoppingListAdapter(private val onDeleteClick: (ShoppingListItem) -> Unit) :
+    ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(SHOPPING_LIST_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_shopping_list, parent, false)
@@ -21,7 +22,8 @@ class ShoppingListAdapter(private val onDeleteClick: (ShoppingListItem) -> Unit)
         holder.bind(current)
     }
 
-    class ShoppingListViewHolder(itemView: View, private val onDeleteClick: (ShoppingListItem) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class ShoppingListViewHolder(itemView: View, private val onDeleteClick: (ShoppingListItem) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
         private val itemNameView: TextView = itemView.findViewById(R.id.item_name)
         private val itemQuantityView: TextView = itemView.findViewById(R.id.item_quantity)
         private val deleteButton: Button = itemView.findViewById(R.id.button_delete)

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ class AddRecipeFragment : Fragment() {
 
     private val recipeViewModel: RecipeViewModel by viewModels()
     private val ingredientViews = mutableListOf<View>()
+    private var recipeId: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +34,21 @@ class AddRecipeFragment : Fragment() {
             addIngredientField(ingredientsContainer)
         }
 
+        recipeId = arguments?.getInt("recipeId") ?: -1
+        if (recipeId != -1) {
+            recipeViewModel.getRecipeById(recipeId).observe(viewLifecycleOwner) { recipe ->
+                recipe?.let {
+                    nameEditText.setText(it.name)
+                    instructionsEditText.setText(it.instructions)
+                    it.ingredients.forEach { ingredient ->
+                        val ingredientView = addIngredientField(ingredientsContainer)
+                        ingredientView.findViewById<EditText>(R.id.edit_ingredient_name).setText(ingredient.name)
+                        ingredientView.findViewById<EditText>(R.id.edit_ingredient_quantity).setText(ingredient.quantity)
+                    }
+                }
+            }
+        }
+
         saveButton.setOnClickListener {
             val name = nameEditText.text.toString()
             val instructions = instructionsEditText.text.toString()
@@ -42,22 +59,32 @@ class AddRecipeFragment : Fragment() {
             }
 
             if (name.isNotEmpty() && ingredients.isNotEmpty() && instructions.isNotEmpty()) {
-                val newRecipe = Recipe(
+                val recipe = Recipe(
+                    id = if (recipeId != -1) recipeId else 0,
                     name = name,
                     ingredients = ingredients,
                     instructions = instructions
                 )
-                recipeViewModel.insert(newRecipe)
+                if (recipeId != -1) {
+                    recipeViewModel.update(recipe)
+                } else {
+                    recipeViewModel.insert(recipe)
+                }
+
+                Toast.makeText(requireContext(), "Recipe saved", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_addRecipeFragment_to_recipeListFragment)
+            } else {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
         return view
     }
 
-    private fun addIngredientField(container: LinearLayout) {
+    private fun addIngredientField(container: LinearLayout): View {
         val ingredientView = layoutInflater.inflate(R.layout.item_add_ingredient, container, false)
         container.addView(ingredientView)
         ingredientViews.add(ingredientView)
+        return ingredientView
     }
 }

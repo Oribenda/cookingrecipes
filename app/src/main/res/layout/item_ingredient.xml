@@ -10,14 +10,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:text="Ingredient Name"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/ingredient_quantity"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginEnd="8dp" />
+        android:layout_weight="1"
+        android:text="Quantity"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/button_add_to_shopping_list"
