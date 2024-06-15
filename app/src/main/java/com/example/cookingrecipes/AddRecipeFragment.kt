@@ -1,13 +1,22 @@
 package com.example.cookingrecipes
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,6 +26,49 @@ class AddRecipeFragment : Fragment() {
     private val recipeViewModel: RecipeViewModel by viewModels()
     private val ingredientViews = mutableListOf<View>()
     private var recipeId: Int = -1
+    private lateinit var imageView: ImageView
+    private var imageUri: Uri? = null
+
+    private lateinit var requestCameraPermissionLauncher: ActivityResultLauncher<String>
+    private lateinit var requestStoragePermissionLauncher: ActivityResultLauncher<String>
+    private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
+    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requestCameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                openCamera()
+            } else {
+                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        requestStoragePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                openGallery()
+            } else {
+                Toast.makeText(requireContext(), "Storage permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val bitmap = result.data?.extras?.get("data") as Bitmap
+                imageView.setImageBitmap(bitmap)
+                // Save or use the bitmap as needed
+            }
+        }
+
+        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                imageUri = result.data?.data
+                imageView.setImageURI(imageUri)
+                // Save or use the imageUri as needed
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +81,12 @@ class AddRecipeFragment : Fragment() {
         val instructionsEditText = view.findViewById<EditText>(R.id.edit_text_instructions)
         val addButton = view.findViewById<Button>(R.id.button_add_ingredient)
         val saveButton = view.findViewById<Button>(R.id.button_save)
+        imageView = view.findViewById(R.id.recipe_image)
+        val uploadButton = view.findViewById<Button>(R.id.button_upload_image)
+
+        uploadButton.setOnClickListener {
+            showImagePickerDialog()
+        }
 
         addButton.setOnClickListener {
             addIngredientField(ingredientsContainer)
@@ -44,6 +102,10 @@ class AddRecipeFragment : Fragment() {
                         val ingredientView = addIngredientField(ingredientsContainer)
                         ingredientView.findViewById<EditText>(R.id.edit_ingredient_name).setText(ingredient.name)
                         ingredientView.findViewById<EditText>(R.id.edit_ingredient_quantity).setText(ingredient.quantity)
+                    }
+                    // Load the image if it exists
+                    it.imageUri?.let { uri ->
+                        imageView.setImageURI(Uri.parse(uri))
                     }
                 }
             }
@@ -63,7 +125,8 @@ class AddRecipeFragment : Fragment() {
                     id = if (recipeId != -1) recipeId else 0,
                     name = name,
                     ingredients = ingredients,
-                    instructions = instructions
+                    instructions = instructions,
+                    imageUri = imageUri?.toString() // Save image URI as string
                 )
                 if (recipeId != -1) {
                     recipeViewModel.update(recipe)
@@ -79,6 +142,65 @@ class AddRecipeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun showImagePickerDialog() {
+        val options = arrayOf("Take Photo", "Choose from Gallery")
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Select Image")
+        builder.setItems(options) { dialog, which ->
+            when (which) {
+                0 -> checkCameraPermission()
+                1 -> checkStoragePermission()
+            }
+        }
+        builder.show()
+    }
+
+    private fun checkCameraPermission() {
+        when {
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
+                openCamera()
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
+                Toast.makeText(requireContext(), "Camera permission is needed to take a photo", Toast.LENGTH_SHORT).show()
+                requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
+            else -> {
+                requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
+        }
+    }
+
+    private fun checkStoragePermission() {
+        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.READ_MEDIA_IMAGES
+        } else {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+
+        when {
+            ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED -> {
+                openGallery()
+            }
+            shouldShowRequestPermissionRationale(permission) -> {
+                Toast.makeText(requireContext(), "Storage permission is needed to pick a photo", Toast.LENGTH_SHORT).show()
+                requestStoragePermissionLauncher.launch(permission)
+            }
+            else -> {
+                requestStoragePermissionLauncher.launch(permission)
+            }
+        }
+    }
+
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraLauncher.launch(cameraIntent)
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        galleryLauncher.launch(galleryIntent)
     }
 
     private fun addIngredientField(container: LinearLayout): View {
