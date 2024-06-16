@@ -69,7 +69,13 @@ class RecipeDetailFragment : Fragment() {
 
                     // Load the image if it exists
                     it.imageUri?.let { uri ->
-                        imageView.setImageURI(Uri.parse(uri))
+                        if (uri.isNotEmpty()) {
+                            imageView.setImageURI(Uri.parse(uri))
+                        } else {
+                            imageView.setImageResource(R.drawable.random_food)
+                        }
+                    } ?: run {
+                        imageView.setImageResource(R.drawable.random_food)
                     }
                 }
             }

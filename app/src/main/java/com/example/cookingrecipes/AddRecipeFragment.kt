@@ -100,6 +100,7 @@ class AddRecipeFragment : Fragment() {
             addIngredientField(ingredientsContainer)
         }
 
+
         recipeId = arguments?.getInt("recipeId") ?: -1
         if (recipeId != -1) {
             recipeViewModel.getRecipeById(recipeId).observe(viewLifecycleOwner) { recipe ->
@@ -113,10 +114,19 @@ class AddRecipeFragment : Fragment() {
                     }
                     // Load the image if it exists
                     it.imageUri?.let { uri ->
-                        imageView.setImageURI(Uri.parse(uri))
+                        if (uri.isNotEmpty()) {
+                            imageView.setImageURI(Uri.parse(uri))
+                        } else {
+                            imageView.setImageResource(R.drawable.upload_photo)
+                        }
+                    } ?: run {
+                        imageView.setImageResource(R.drawable.upload_photo)
                     }
                 }
             }
+        }
+        else{
+            imageView.setImageResource(R.drawable.upload_photo)
         }
 
         saveButton.setOnClickListener {
