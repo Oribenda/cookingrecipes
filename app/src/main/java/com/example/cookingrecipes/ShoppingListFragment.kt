@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +30,21 @@ class ShoppingListFragment : Fragment() {
 
         shoppingListItemViewModel.allItems.observe(viewLifecycleOwner) { items ->
             items?.let { adapter.submitList(it) }
+        }
+
+        val nameEditText: EditText = view.findViewById(R.id.edit_ingredient_name)
+        val quantityEditText: EditText = view.findViewById(R.id.edit_ingredient_quantity)
+        val addButton: Button = view.findViewById(R.id.button_add_ingredient)
+
+        addButton.setOnClickListener {
+            val name = nameEditText.text.toString()
+            val quantity = quantityEditText.text.toString()
+            if (name.isNotEmpty() && quantity.isNotEmpty()) {
+                val item = ShoppingListItem(name = name, quantity = quantity)
+                shoppingListItemViewModel.insertOrUpdate(item)
+                nameEditText.text.clear()
+                quantityEditText.text.clear()
+            }
         }
 
         return view

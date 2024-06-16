@@ -9,43 +9,39 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class ShoppingListAdapter(private val onDeleteClick: (ShoppingListItem) -> Unit) :
-    ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(SHOPPING_LIST_COMPARATOR) {
+class ShoppingListAdapter(
+    private val onDeleteClick: (ShoppingListItem) -> Unit
+) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(ShoppingListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_shopping_list, parent, false)
-        return ShoppingListViewHolder(view, onDeleteClick)
+        return ShoppingListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.bind(current)
+        val item = getItem(position)
+        holder.bind(item, onDeleteClick)
     }
 
-    class ShoppingListViewHolder(itemView: View, private val onDeleteClick: (ShoppingListItem) -> Unit) :
-        RecyclerView.ViewHolder(itemView) {
-        private val itemNameView: TextView = itemView.findViewById(R.id.item_name)
-        private val itemQuantityView: TextView = itemView.findViewById(R.id.item_quantity)
+    class ShoppingListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nameTextView: TextView = itemView.findViewById(R.id.ingredient_name)
+        private val quantityTextView: TextView = itemView.findViewById(R.id.ingredient_quantity)
         private val deleteButton: Button = itemView.findViewById(R.id.button_delete)
 
-        fun bind(item: ShoppingListItem) {
-            itemNameView.text = item.name
-            itemQuantityView.text = item.quantity
-            deleteButton.setOnClickListener {
-                onDeleteClick(item)
-            }
+        fun bind(item: ShoppingListItem, onDeleteClick: (ShoppingListItem) -> Unit) {
+            nameTextView.text = item.name
+            quantityTextView.text = item.quantity
+            deleteButton.setOnClickListener { onDeleteClick(item) }
         }
     }
+}
 
-    companion object {
-        private val SHOPPING_LIST_COMPARATOR = object : DiffUtil.ItemCallback<ShoppingListItem>() {
-            override fun areItemsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem): Boolean {
-                return oldItem.id == newItem.id
-            }
+class ShoppingListDiffCallback : DiffUtil.ItemCallback<ShoppingListItem>() {
+    override fun areItemsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem): Boolean {
+        return oldItem.id == newItem.id
+    }
 
-            override fun areContentsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem): Boolean {
-                return oldItem == newItem
-            }
-        }
+    override fun areContentsTheSame(oldItem: ShoppingListItem, newItem: ShoppingListItem): Boolean {
+        return oldItem == newItem
     }
 }
