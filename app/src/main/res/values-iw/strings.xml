@@ -4,4 +4,10 @@
     <string name="fragment_shopping_list_Item_name">שם הפריט</string>
     <string name="fragment_shopping_list_quantity">כמות</string>
     <string name="fragment_shopping_list_add">הוספה</string>
+    <string name="storage_permission_denied">ההרשאה לאחסון נדחתה</string>
+    <string name="camera_permission_denied">ההרשטה למצלמה נדחתה</string>
+    <string name="recipe_saved">המתכון נשמר</string>
+    <string name="please_fill_all_fields">נא למלא את כל השדות</string>
+    <string name="camera_permission_is_needed_to_take_a_photo">נדרשת הרשאה למצלמה בכדי לצלם</string>
+    <string name="camera_permission_is_needed_to_pick_a_photo">נדרשת הרשאה לאחסון בכדי לבחור תמונה</string>
 </resources>

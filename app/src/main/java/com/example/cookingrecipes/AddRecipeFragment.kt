@@ -42,7 +42,7 @@ class AddRecipeFragment : Fragment() {
             if (isGranted) {
                 openCamera()
             } else {
-                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.camera_permission_denied), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -50,7 +50,7 @@ class AddRecipeFragment : Fragment() {
             if (isGranted) {
                 openGallery()
             } else {
-                Toast.makeText(requireContext(), "Storage permission denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.storage_permission_denied), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -134,7 +134,7 @@ class AddRecipeFragment : Fragment() {
                     name = name,
                     ingredients = ingredients,
                     instructions = instructions,
-                    imageUri = imageUri?.toString() // Save image URI as string
+                    imageUri = imageUri?.toString()
                 )
                 if (recipeId != -1) {
                     recipeViewModel.update(recipe)
@@ -142,10 +142,10 @@ class AddRecipeFragment : Fragment() {
                     recipeViewModel.insert(recipe)
                 }
 
-                Toast.makeText(requireContext(), "Recipe saved", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.recipe_saved), Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_addRecipeFragment_to_recipeListFragment)
             } else {
-                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.please_fill_all_fields), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -171,7 +171,7 @@ class AddRecipeFragment : Fragment() {
                 openCamera()
             }
             shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
-                Toast.makeText(requireContext(), "Camera permission is needed to take a photo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.camera_permission_is_needed_to_take_a_photo), Toast.LENGTH_SHORT).show()
                 requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
             }
             else -> {
@@ -192,7 +192,7 @@ class AddRecipeFragment : Fragment() {
                 openGallery()
             }
             shouldShowRequestPermissionRationale(permission) -> {
-                Toast.makeText(requireContext(), "Storage permission is needed to pick a photo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.camera_permission_is_needed_to_pick_a_photo), Toast.LENGTH_SHORT).show()
                 requestStoragePermissionLauncher.launch(permission)
             }
             else -> {

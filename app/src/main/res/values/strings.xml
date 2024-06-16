@@ -3,4 +3,11 @@
     <string name="fragment_shopping_list_Item_name">Item Name</string>
     <string name="fragment_shopping_list_quantity">Quantity</string>
     <string name="fragment_shopping_list_add">ADD</string>
+    <string name="storage_permission_denied">Storage permission denied</string>
+    <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="recipe_saved">Recipe saved</string>
+    <string name="please_fill_all_fields">Please fill all fields</string>
+    <string name="camera_permission_is_needed_to_take_a_photo">Camera permission is needed to take a photo</string>
+    <string name="camera_permission_is_needed_to_pick_a_photo">Storage permission is needed to pick a photo</string>
+
 </resources>
