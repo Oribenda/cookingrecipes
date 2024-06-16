@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -68,6 +69,13 @@ class AddRecipeFragment : Fragment() {
                 // Save or use the imageUri as needed
             }
         }
+
+        // Handle the back button press
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.action_addRecipeFragment_to_recipeListFragment)
+            }
+        })
     }
 
     override fun onCreateView(
