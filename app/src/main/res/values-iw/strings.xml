@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CookingRecipes</string>
+    <string name="fragment_shopping_list_Item_name">שם הפריט</string>
+    <string name="fragment_shopping_list_quantity">כמות</string>
+    <string name="fragment_shopping_list_add">הוספה</string>
+</resources>

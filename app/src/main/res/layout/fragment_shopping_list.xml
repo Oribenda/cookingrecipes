@@ -24,20 +24,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Ingredient Name" />
+            android:hint="@string/fragment_shopping_list_Item_name" />
 
         <EditText
             android:id="@+id/edit_ingredient_quantity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Quantity" />
+            android:hint="@string/fragment_shopping_list_quantity"
+            android:inputType="number"/>
 
         <Button
             android:id="@+id/button_add_ingredient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add" />
+            android:text="@string/fragment_shopping_list_add" />
     </LinearLayout>
 
 </LinearLayout>
