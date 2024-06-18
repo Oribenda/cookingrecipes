@@ -22,9 +22,17 @@ class ShoppingListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_shopping_list, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.shopping_list_recyclerview)
-        val adapter = ShoppingListAdapter { item ->
-            shoppingListItemViewModel.delete(item)
-        }
+        val adapter = ShoppingListAdapter(
+            onDeleteClick = { item ->
+                shoppingListItemViewModel.delete(item)
+            },
+            onMinusClick = { item ->
+                shoppingListItemViewModel.decrementQuantity(item)
+            },
+            onPlusClick = { item ->
+                shoppingListItemViewModel.incrementQuantity(item)
+            }
+        )
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 

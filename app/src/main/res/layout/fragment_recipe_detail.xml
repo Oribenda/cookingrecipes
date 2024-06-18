@@ -1,45 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/recipe_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Recipe Name"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
-
-    <ImageView
-        android:id="@+id/recipe_image"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="centerCrop" />
+    android:padding="@dimen/main_activity_horizontal_margin">
 
     <LinearLayout
-        android:id="@+id/ingredients_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="8dp" />
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/recipe_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Recipe Instructions"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp" />
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recipe_name"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple"
+            android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+            android:layout_marginBottom="@dimen/main_activity_vertical_margin_text" />
 
-    <Button
-        android:id="@+id/button_edit_recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit Recipe" />
+        <ImageView
+            android:id="@+id/recipe_image"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerCrop" />
 
-</LinearLayout>
+        <!-- Ingredients Headline -->
+        <TextView
+            android:id="@+id/ingredients_headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ingredient"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple"
+            android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+            android:layout_marginBottom="@dimen/main_activity_vertical_margin_text" />
+
+        <LinearLayout
+            android:id="@+id/ingredients_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Instructions Headline -->
+        <TextView
+            android:id="@+id/instructions_headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/instructions"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple"
+            android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+            android:layout_marginBottom="@dimen/main_activity_vertical_margin_text" />
+
+        <TextView
+            android:id="@+id/recipe_instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recipe_instructions"
+            android:textSize="16sp"
+            android:textColor="@color/purple"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+            android:layout_marginBottom="@dimen/main_activity_vertical_margin_text" />
+
+        <Button
+            android:id="@+id/button_edit_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_recipe"
+            android:textColor="@color/darkblue"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/blue"
+            android:layout_marginTop="@dimen/main_button_vertical_spacing"
+            android:layout_marginBottom="@dimen/main_button_vertical_spacing"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -4,20 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="@dimen/main_activity_horizontal_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textSize="24sp"
+            android:text="@string/settings"
+            android:textSize="40sp"
             android:textStyle="bold"
-            android:paddingBottom="16dp" />
+            android:textColor="@color/purple"
+            android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+            android:layout_marginBottom="@dimen/main_activity_vertical_margin_text"
+            android:gravity="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,8 +33,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Enable Notifications"
-                android:textSize="18sp" />
+                android:text="@string/enable_notifications"
+                android:textSize="28sp"
+                android:textColor="@color/blue"
+                android:gravity="center_vertical" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:layout_width="wrap_content"
@@ -48,8 +54,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Dark Mode"
-                android:textSize="18sp" />
+                android:text="@string/dark_mode"
+                android:textSize="28sp"
+                android:textColor="@color/blue"
+                android:gravity="center_vertical" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:layout_width="wrap_content"
@@ -67,8 +75,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Language"
-                android:textSize="18sp" />
+                android:text="@string/language"
+                android:textSize="28sp"
+                android:textColor="@color/blue"
+                android:gravity="center_vertical" />
 
             <Spinner
                 android:layout_width="wrap_content"

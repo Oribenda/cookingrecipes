@@ -4,18 +4,71 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="@dimen/main_activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/text_headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_page_headline"
+        android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+        android:layout_marginBottom="@dimen/main_activity_vertical_margin_text"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/purple" />
+
+    <TextView
+        android:id="@+id/text_explanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+        android:layout_marginBottom="@dimen/main_activity_vertical_margin_text"
+        android:text="@string/about"
+        android:textColor="@color/purple"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/button_recipes"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recipes" />
+        android:text="@string/recipes"
+        android:textColor="@color/darkblue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="@dimen/main_activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/main_button_vertical_spacing"
+        android:layout_weight="1"
+        android:gravity="center" />
 
     <Button
         android:id="@+id/button_shopping_list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Shopping List"
-        android:layout_marginTop="16dp" />
+        android:text="@string/shopping_list"
+        android:textColor="@color/darkblue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="@dimen/main_button_vertical_spacing"
+        android:layout_marginBottom="@dimen/main_button_vertical_spacing"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/button_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:textColor="@color/darkblue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="@dimen/main_button_vertical_spacing"
+        android:layout_marginBottom="@dimen/main_button_vertical_spacing"
+        android:layout_weight="1"
+        android:gravity="center" />
+
 </LinearLayout>

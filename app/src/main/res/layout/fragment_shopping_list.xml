@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/main_activity_horizontal_margin">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/shopping_list_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+        android:layout_marginBottom="@dimen/main_activity_vertical_margin_text" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingTop="16dp">
+        android:paddingTop="@dimen/main_activity_vertical_margin_text">
 
         <EditText
             android:id="@+id/edit_ingredient_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/fragment_shopping_list_Item_name" />
+            android:hint="@string/fragment_shopping_list_Item_name"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp" />
 
         <EditText
             android:id="@+id/edit_ingredient_quantity"
@@ -32,13 +39,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/fragment_shopping_list_quantity"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"/>
 
         <Button
             android:id="@+id/button_add_ingredient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_shopping_list_add" />
+            android:text="@string/fragment_shopping_list_add"
+            android:textColor="@color/darkblue"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/blue"
+            android:padding="8dp"
+            android:gravity="center" />
     </LinearLayout>
 
 </LinearLayout>

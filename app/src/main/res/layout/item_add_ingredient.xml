@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="Ingredient Name"
+        android:hint="@string/ingredient_name"
         android:textSize="16sp"
         android:layout_marginEnd="8dp" />
 
@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="Quantity"
+        android:hint="@string/quantity"
         android:textSize="16sp"
         android:inputType="number"/>
 </LinearLayout>

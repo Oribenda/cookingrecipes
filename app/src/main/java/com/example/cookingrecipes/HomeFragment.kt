@@ -18,6 +18,7 @@ class HomeFragment : Fragment() {
 
         val recipesButton = view.findViewById<Button>(R.id.button_recipes)
         val shoppingListButton = view.findViewById<Button>(R.id.button_shopping_list)
+        val settingButton = view.findViewById<Button>(R.id.button_settings)
 
         recipesButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_recipeListFragment)
@@ -25,6 +26,10 @@ class HomeFragment : Fragment() {
 
         shoppingListButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_shoppingListFragment)
+        }
+
+        settingButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
 
         return view

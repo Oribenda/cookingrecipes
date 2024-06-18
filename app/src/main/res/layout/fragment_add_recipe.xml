@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -11,58 +9,105 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edit_text_name"
+        <TextView
+            android:id="@+id/text_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Recipe Name"
-            android:textSize="18sp"
-            android:paddingBottom="8dp" />
+            android:text="@string/recipe_form_headline"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/purple"
+            android:paddingBottom="16dp" />
 
-        <ImageView
-            android:id="@+id/recipe_image"
+        <TextView
+            android:id="@+id/text_about"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="Recipe Image" />
-
-        <Button
-            android:id="@+id/button_upload_image"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload Image"
-            android:layout_marginTop="8dp" />
+            android:text="@string/recipe_form_about"
+            android:textSize="20sp"
+            android:textColor="@color/purple"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingBottom="16dp" />
 
         <LinearLayout
-            android:id="@+id/ingredients_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_add_ingredient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Ingredient"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+            <!-- Recipe Name EditText -->
+            <EditText
+                android:id="@+id/edit_text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe_name"
+                android:textSize="18sp"
+                android:paddingBottom="8dp" />
 
-        <EditText
-            android:id="@+id/edit_text_instructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Instructions"
-            android:textSize="18sp"
-            android:paddingBottom="8dp"
-            android:inputType="textMultiLine"
-            android:minLines="4" />
+            <!-- Recipe Image ImageView -->
+            <ImageView
+                android:id="@+id/recipe_image"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="Recipe Image" />
 
-        <Button
-            android:id="@+id/button_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:layout_marginTop="16dp" />
+            <!-- Upload Image Button -->
+            <Button
+                android:id="@+id/button_upload_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/upload_image"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/blue"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:padding="12dp" />
+
+            <!-- Ingredients Container (will be dynamically populated) -->
+            <LinearLayout
+                android:id="@+id/ingredients_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <!-- Add Ingredient Button -->
+            <Button
+                android:id="@+id/button_add_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_ingredient"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/blue"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:padding="12dp" />
+
+            <!-- Instructions EditText -->
+            <EditText
+                android:id="@+id/edit_text_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/instructions"
+                android:textSize="18sp"
+                android:paddingBottom="8dp"
+                android:inputType="textMultiLine"
+                android:minLines="4" />
+
+            <!-- Save Button -->
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/blue"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:padding="12dp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
+

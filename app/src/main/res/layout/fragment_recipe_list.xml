@@ -3,17 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/main_activity_horizontal_margin">
 
     <Button
         android:id="@+id/button_add_recipe"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Recipe"
-        android:layout_marginBottom="16dp" />
+        android:text="@string/add_recipe"
+        android:textColor="@color/darkblue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="@dimen/main_activity_vertical_margin_text"
+        android:layout_marginBottom="@dimen/main_activity_vertical_margin_text"
+        android:gravity="center" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_list_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/main_button_vertical_spacing"
+        android:layout_marginBottom="@dimen/main_button_vertical_spacing" />
 </LinearLayout>

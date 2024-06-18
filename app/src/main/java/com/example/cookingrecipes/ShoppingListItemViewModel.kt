@@ -31,4 +31,20 @@ class ShoppingListItemViewModel(application: Application) : AndroidViewModel(app
     fun delete(item: ShoppingListItem) = viewModelScope.launch {
         repository.delete(item)
     }
+
+    fun incrementQuantity(item: ShoppingListItem) = viewModelScope.launch {
+        val newQuantity = (item.quantity.toInt() + 1).toString()
+        val updatedItem = item.copy(quantity = newQuantity)
+        repository.update(updatedItem)
+    }
+
+    fun decrementQuantity(item: ShoppingListItem) = viewModelScope.launch {
+        val newQuantity = (item.quantity.toInt() - 1)
+        if (newQuantity > 0) {
+            val updatedItem = item.copy(quantity = newQuantity.toString())
+            repository.update(updatedItem)
+        } else {
+            repository.delete(item)
+        }
+    }
 }

@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 class ShoppingListAdapter(
-    private val onDeleteClick: (ShoppingListItem) -> Unit
+    private val onDeleteClick: (ShoppingListItem) -> Unit,
+    private val onMinusClick: (ShoppingListItem) -> Unit,
+    private val onPlusClick: (ShoppingListItem) -> Unit
 ) : ListAdapter<ShoppingListItem, ShoppingListAdapter.ShoppingListViewHolder>(ShoppingListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
@@ -20,18 +23,27 @@ class ShoppingListAdapter(
 
     override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, onDeleteClick)
+        holder.bind(item, onDeleteClick, onMinusClick, onPlusClick)
     }
 
     class ShoppingListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.ingredient_name)
         private val quantityTextView: TextView = itemView.findViewById(R.id.ingredient_quantity)
         private val deleteButton: Button = itemView.findViewById(R.id.button_delete)
+        private val minusButton: ImageButton = itemView.findViewById(R.id.button_minus)
+        private val plusButton: ImageButton = itemView.findViewById(R.id.button_plus)
 
-        fun bind(item: ShoppingListItem, onDeleteClick: (ShoppingListItem) -> Unit) {
+        fun bind(
+            item: ShoppingListItem,
+            onDeleteClick: (ShoppingListItem) -> Unit,
+            onMinusClick: (ShoppingListItem) -> Unit,
+            onPlusClick: (ShoppingListItem) -> Unit
+        ) {
             nameTextView.text = item.name
             quantityTextView.text = item.quantity
             deleteButton.setOnClickListener { onDeleteClick(item) }
+            minusButton.setOnClickListener { onMinusClick(item) }
+            plusButton.setOnClickListener { onPlusClick(item) }
         }
     }
 }
