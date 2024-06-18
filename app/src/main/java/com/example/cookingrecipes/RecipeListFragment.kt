@@ -1,17 +1,18 @@
 package com.example.cookingrecipes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.*
 
 class RecipeListFragment : Fragment() {
 
@@ -41,7 +42,7 @@ class RecipeListFragment : Fragment() {
                 findNavController().navigate(actionId, bundle)
             },
             onDeleteClick = { recipe ->
-                recipeViewModel.delete(recipe)
+                showDeleteConfirmationDialog(recipe)
             }
         )
         recyclerView.adapter = adapter
@@ -57,5 +58,17 @@ class RecipeListFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun showDeleteConfirmationDialog(recipe: Recipe) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete Recipe")
+            .setMessage("Are you sure you want to delete this recipe?")
+            .setPositiveButton("Delete") { dialog, which ->
+                recipeViewModel.delete(recipe)
+                Toast.makeText(requireContext(), getString(R.string.after_delete_recipe_alert), Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }

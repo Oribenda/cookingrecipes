@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,6 +14,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import android.widget.*
 
 class RecipeDetailFragment : Fragment() {
 
@@ -55,13 +57,15 @@ class RecipeDetailFragment : Fragment() {
                         val ingredientView = layoutInflater.inflate(R.layout.item_ingredient, null)
                         val ingredientNameTextView = ingredientView.findViewById<TextView>(R.id.ingredient_name)
                         val ingredientQuantityTextView = ingredientView.findViewById<TextView>(R.id.ingredient_quantity)
-                        val addButton = ingredientView.findViewById<Button>(R.id.button_add_to_shopping_list)
+                        val addButton = ingredientView.findViewById<ImageButton>(R.id.button_add_to_shopping_list)
 
                         ingredientNameTextView.text = ingredient.name
                         ingredientQuantityTextView.text = ingredient.quantity
                         addButton.setOnClickListener {
                             val item = ShoppingListItem(name = ingredient.name, quantity = ingredient.quantity)
                             shoppingListItemViewModel.insertOrUpdate(item)
+                            Toast.makeText(requireContext(), getString(R.string.item_saved_in_shopping_list_alert), Toast.LENGTH_SHORT).show()
+
                         }
 
                         ingredientsList.addView(ingredientView)

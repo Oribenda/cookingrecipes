@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.*
+
 
 class ShoppingListFragment : Fragment() {
 
@@ -25,6 +27,8 @@ class ShoppingListFragment : Fragment() {
         val adapter = ShoppingListAdapter(
             onDeleteClick = { item ->
                 shoppingListItemViewModel.delete(item)
+                Toast.makeText(requireContext(), getString(R.string.after_delete_item_alert), Toast.LENGTH_SHORT).show()
+
             },
             onMinusClick = { item ->
                 shoppingListItemViewModel.decrementQuantity(item)
@@ -52,6 +56,11 @@ class ShoppingListFragment : Fragment() {
                 shoppingListItemViewModel.insertOrUpdate(item)
                 nameEditText.text.clear()
                 quantityEditText.text.clear()
+                Toast.makeText(requireContext(), getString(R.string.item_saved_alert), Toast.LENGTH_SHORT).show()
+
+            }
+            else{
+                Toast.makeText(requireContext(), getString(R.string.please_fill_all_fields), Toast.LENGTH_SHORT).show()
             }
         }
 

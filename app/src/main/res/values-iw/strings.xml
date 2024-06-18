@@ -15,19 +15,19 @@
     <string name="add_ingredient">הוסף רכיב</string>
     <string name="instructions">הוראות הכנה</string>
     <string name="save">שמור</string>
-    <string name="recipes">מתכונים</string>
-    <string name="shopping_list">רשימת קניות</string>
+    <string name="recipes">מתכונים 🧑‍🍳</string>
+    <string name="shopping_list">רשימת קניות 🛒</string>
     <string name="recipe_instructions">הוראות המתכון</string>
     <string name="edit_recipe">עדכון המתכון</string>
     <string name="add_recipe">הוסף מתכון</string>
-    <string name="settings">הגדרות</string>
+    <string name="settings">הגדרות ⚙️</string>
     <string name="enable_notifications">אפשר התראות</string>
     <string name="dark_mode">מצב חושך</string>
     <string name="language">שפה</string>
     <string name="ingredient_name">שם הרכיב</string>
     <string name="quantity">כמות</string>
-    <string name="add">הוספה</string>
-    <string name="delete">מחק</string>
+    <string name="item_ingredient_add">הוספה</string>
+    <string name="delete">מחיקה</string>
     <string name="about">בואו לשמור ולגלות מתכונים חדשים בזמן שתוכלו להכין רשימת קניות מתעדכנת</string>
     <string name="main_page_headline">אפליקציית הבישול!</string>
     <string name="recipe_form_headline">פרטי המתכון</string>
@@ -36,4 +36,14 @@
     <string name="item_shopping_list_ingredient_name">שם המוצר</string>
     <string name="item_shopping_list_quantity">כמות</string>
     <string name="item_shopping_list_delete">מחיקה</string>
+    <string name="after_delete_recipe_alert">המתכון נמחק בהצלחה</string>
+    <string name="after_delete_item_alert">פריט נמחק בהצלחה</string>
+    <string name="item_saved_alert">פריט התווסף בהצלחה</string>
+    <string name="item_saved_in_shopping_list_alert">הפריט התווסף לעגלת הקניות</string>
+    <string name="edit_recipe_label">מתכון חדש</string>
+    <string name="recipe_details_label">פרטי המתכון</string>
+    <string name="recipe_list_label">רשימת מתכונים 🧑‍🍳</string>
+    <string name="home_label">עמוד הבית</string>
+
+
 </resources>

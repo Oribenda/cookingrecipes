@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.cookingrecipes.HomeFragment"
-        android:label="Home"
+        android:label="@string/home_label"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_recipeListFragment"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/recipeListFragment"
         android:name="com.example.cookingrecipes.RecipeListFragment"
-        android:label="Recipe List"
+        android:label="@string/recipe_list_label"
         tools:layout="@layout/fragment_recipe_list">
         <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.example.cookingrecipes.RecipeDetailFragment"
-        android:label="Recipe Detail"
+        android:label="@string/recipe_details_label"
         tools:layout="@layout/fragment_recipe_detail">
         <action
             android:id="@+id/action_recipeDetailFragment_to_addRecipeFragment"
@@ -64,7 +64,7 @@
     <fragment
         android:id="@+id/addRecipeFragment"
         android:name="com.example.cookingrecipes.AddRecipeFragment"
-        android:label="Add/Edit Recipe"
+        android:label="@string/edit_recipe_label"
         tools:layout="@layout/fragment_add_recipe">
         <action
             android:id="@+id/action_addRecipeFragment_to_recipeListFragment"
@@ -78,12 +78,12 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.cookingrecipes.SettingsFragment"
-        android:label="Settings"
+        android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/shoppingListFragment"
         android:name="com.example.cookingrecipes.ShoppingListFragment"
-        android:label="Shopping List"
+        android:label="@string/shopping_list"
         tools:layout="@layout/fragment_shopping_list" />
 </navigation>
