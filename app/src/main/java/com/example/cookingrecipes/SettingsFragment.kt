@@ -1,6 +1,7 @@
 package com.example.cookingrecipes
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsFragment : Fragment() {
@@ -59,6 +60,33 @@ class SettingsFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        // Handle play button
+        val playButton: Button = view.findViewById(R.id.playButton)
+        playButton.setOnClickListener {
+            val intent = Intent(requireContext(), MusicService::class.java).apply {
+                action = MusicService.ACTION_PLAY
+            }
+            requireActivity().startService(intent)
+        }
+
+        // Handle pause button
+        val pauseButton: Button = view.findViewById(R.id.pauseButton)
+        pauseButton.setOnClickListener {
+            val intent = Intent(requireContext(), MusicService::class.java).apply {
+                action = MusicService.ACTION_PAUSE
+            }
+            requireActivity().startService(intent)
+        }
+
+        // Handle stop button
+        val stopButton: Button = view.findViewById(R.id.stopButton)
+        stopButton.setOnClickListener {
+            val intent = Intent(requireContext(), MusicService::class.java).apply {
+                action = MusicService.ACTION_STOP
+            }
+            requireActivity().startService(intent)
         }
 
         return view

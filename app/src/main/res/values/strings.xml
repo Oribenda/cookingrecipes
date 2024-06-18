@@ -43,6 +43,9 @@
     <string name="recipe_details_label">Recipe Details</string>
     <string name="recipe_list_label">Recipe List 🧑‍🍳</string>
     <string name="home_label">Home Page</string>
+    <string name="play">Play Music</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
 
 
 

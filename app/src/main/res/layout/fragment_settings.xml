@@ -85,5 +85,49 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_language" />
         </LinearLayout>
+
+        <!-- Add Play, Pause, Stop Buttons -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/playButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/blue"
+                android:text="@string/play"
+                android:textColor="@color/darkblue"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/pauseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/playButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/blue"
+                android:text="@string/pause"
+                android:textColor="@color/darkblue"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/stopButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pauseButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/blue"
+                android:text="@string/stop"
+                android:textColor="@color/darkblue"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

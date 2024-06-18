@@ -44,6 +44,9 @@
     <string name="recipe_details_label">פרטי המתכון</string>
     <string name="recipe_list_label">רשימת מתכונים 🧑‍🍳</string>
     <string name="home_label">עמוד הבית</string>
+    <string name="play">נגן מוזיקה</string>
+    <string name="pause">השהה</string>
+    <string name="stop">עצור</string>
 
 
 </resources>
