@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.NavOptions
 
 class AddRecipeFragment : Fragment() {
 
@@ -153,7 +154,11 @@ class AddRecipeFragment : Fragment() {
                 }
 
                 Toast.makeText(requireContext(), getString(R.string.recipe_saved), Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_addRecipeFragment_to_recipeListFragment)
+
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.recipeListFragment, true)
+                    .build()
+                findNavController().navigate(R.id.action_addRecipeFragment_to_recipeListFragment, null, navOptions)
             } else {
                 Toast.makeText(requireContext(), getString(R.string.please_fill_all_fields), Toast.LENGTH_SHORT).show()
             }
