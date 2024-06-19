@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
     id("kotlin-android")
     id("kotlin-kapt")
 }
@@ -45,6 +46,7 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation("androidx.room:room-ktx:2.5.0")
     implementation("androidx.room:room-testing:2.6.1")
+    implementation(libs.play.services.measurement.api)
     kapt("androidx.room:room-compiler:2.6.1")
 
     val nav_version = "2.7.7"
@@ -59,6 +61,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.4")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
     implementation("com.google.code.gson:gson:2.8.8")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
+    implementation ("com.google.firebase:firebase-analytics-ktx:20.0.4")
+
 
 }
 

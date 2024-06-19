@@ -14,6 +14,7 @@ material = "1.12.0"
 runtimeAndroid = "1.6.8"
 material3Android = "1.2.1"
 foundationAndroid = "1.6.8"
+playServicesMeasurementApi = "22.0.1"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -36,6 +37,7 @@ androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
+play-services-measurement-api = { group = "com.google.android.gms", name = "play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
